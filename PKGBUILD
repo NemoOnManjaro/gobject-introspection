@@ -1,4 +1,3 @@
-# $Id: $
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 pkgname=gobject-introspection
 pkgver=0.6.5
