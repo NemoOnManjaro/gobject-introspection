@@ -1,7 +1,7 @@
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 pkgname=gobject-introspection
 pkgver=0.9.10
-pkgrel=1
+pkgrel=2
 pkgdesc="Introspection system for GObject-based libraries"
 url="http://live.gnome.org/GObjectInstrospection"
 arch=('x86_64' 'i686')
@@ -23,4 +23,7 @@ build() {
 package() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
+  
+  sed -i "s|#!/usr/bin/env python|#!/usr/bin/env python2|" \
+    "${pkgdir}"/usr/lib/gobject-introspection/giscanner/*.py
 }
