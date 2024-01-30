@@ -23,8 +23,7 @@ makedepends=(
   git
   "glib2=$_glibver"
   gtk-doc
-  libffi.so
-  libg{lib,object,module,io}-2.0.so
+  libffi
   meson
   python-mako
   python-markdown

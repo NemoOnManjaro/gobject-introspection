@@ -10,11 +10,7 @@ pkgbase = gobject-introspection
 	makedepends = git
 	makedepends = glib2=2.79.0
 	makedepends = gtk-doc
-	makedepends = libffi.so
-	makedepends = libglib-2.0.so
-	makedepends = libgobject-2.0.so
-	makedepends = libgmodule-2.0.so
-	makedepends = libgio-2.0.so
+	makedepends = libffi
 	makedepends = meson
 	makedepends = python-mako
 	makedepends = python-markdown
