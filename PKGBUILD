@@ -8,7 +8,7 @@ pkgname=(
   gobject-introspection-runtime
   libgirepository
 )
-pkgver=1.79.1
+pkgver=1.80.0
 pkgrel=1
 pkgdesc="Introspection system for GObject-based libraries"
 url="https://wiki.gnome.org/Projects/GObjectIntrospection"
@@ -17,7 +17,7 @@ license=(
   GPL-2.0-or-later
   LGPL-2.0-or-later
 )
-_glibver=2.79.0
+_glibver=2.80.0
 makedepends=(
   cairo
   git
@@ -29,7 +29,7 @@ makedepends=(
   python-markdown
   python-sphinx
 )
-_commit=ebf4c2f40969b3bb73b1a09d765c9f3204e64efa  # tags/1.79.1^0
+_commit=2f3fe819bbb5b3bce1462fe02405c2f9ffdce0d3  # tags/1.80.0^0
 source=(
   "git+https://gitlab.gnome.org/GNOME/gobject-introspection.git#commit=$_commit"
   "git+https://gitlab.gnome.org/GNOME/glib.git?signed#tag=$_glibver"
