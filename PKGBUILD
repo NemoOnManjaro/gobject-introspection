@@ -8,8 +8,8 @@ pkgname=(
   gobject-introspection-runtime
   libgirepository
 )
-pkgver=1.80.1
-pkgrel=3
+pkgver=1.81.2
+pkgrel=1
 pkgdesc="Introspection system for GObject-based libraries"
 url="https://wiki.gnome.org/Projects/GObjectIntrospection"
 arch=(x86_64)
@@ -17,7 +17,7 @@ license=(
   GPL-2.0-or-later
   LGPL-2.0-or-later
 )
-_glibver=2.80.0
+_glibver=2.82.0
 makedepends=(
   "glib2=$_glibver"
   cairo
@@ -36,9 +36,11 @@ makedepends=(
 source=(
   "git+https://gitlab.gnome.org/GNOME/gobject-introspection.git#tag=$pkgver"
   "git+https://gitlab.gnome.org/GNOME/glib.git?signed#tag=$_glibver"
+  "git+https://gitlab.gnome.org/GNOME/gobject-introspection-tests.git"
 )
-b2sums=('1615fb991f5eba1a384ce684d89acaeb08417b65d77b33019e6e2b94ee0c7038186f0c09011268092194339cc870f3f6ef25ca8f32dc454f9a298fce36400d86'
-        'cc3a6a7a14fef1aabc08d3bdfe98f66e3ecf3591ac054d83aa9404c8c9cd72e690a4c26c16934700d067bb2cb3d58730387482032cd9ffa04b041869426165ba')
+b2sums=('cadb825cb453de7b0e3aa4f2419a7183e2a9d816a53cc9a16cb54b162a882fd38f60f73349ccbba29b95ef267fdb4d0786f078b17778758c3ea4af67538e7c7a'
+        '9dee8619918d1bf85d853ddc661c4702046b5361bd3fde105d0b3c550f5dbdbaa6578557107588053bb4e980a21e83b95c2c9e9c7868fb89ca852bc950ac3dba'
+        'SKIP')
 validpgpkeys=(
   923B7025EE03C1C59F42684CF0942E894B2EAFA0  # Philip Withnall <philip@tecnocode.co.uk>
   D4C501DA48EB797A081750939449C2F50996635F  # Marco Trevisan <marco@trevi.me>
@@ -46,6 +48,10 @@ validpgpkeys=(
 
 prepare() {
   cd $pkgbase
+
+  git submodule init
+  git submodule set-url gobject-introspection-tests "${srcdir}/gobject-introspection-tests"
+  git -c protocol.file.allow=always -c protocol.allow=never submodule update
 }
   
 build() {
@@ -95,7 +101,6 @@ package_gobject-introspection() {
   _pick libg usr/include/gobject-introspection-1.0
   _pick libg usr/lib/libgirepository-1.0.so*
   _pick libg usr/lib/pkgconfig/gobject-introspection*-1.0.pc
-  _pick libg usr/lib/girepository-1.0/GIRepository-2.0.typelib
   _pick libg usr/share/gir-1.0/GIRepository-2.0.gir
   _pick libg usr/share/gtk-doc
 
