@@ -8,7 +8,7 @@ pkgname=(
   gobject-introspection-runtime
   libgirepository
 )
-pkgver=1.81.2
+pkgver=1.81.4
 pkgrel=1
 pkgdesc="Introspection system for GObject-based libraries"
 url="https://wiki.gnome.org/Projects/GObjectIntrospection"
@@ -38,7 +38,7 @@ source=(
   "git+https://gitlab.gnome.org/GNOME/glib.git?signed#tag=$_glibver"
   "git+https://gitlab.gnome.org/GNOME/gobject-introspection-tests.git"
 )
-b2sums=('cadb825cb453de7b0e3aa4f2419a7183e2a9d816a53cc9a16cb54b162a882fd38f60f73349ccbba29b95ef267fdb4d0786f078b17778758c3ea4af67538e7c7a'
+b2sums=('cc8e5cc63c46cf44b2a6fa0ee64f9c367a064524018269d320b10780574bdca68b706db75dc2845d029bbb5c3c3096e60d569a86a45b4a769f455273dfce9feb'
         '9dee8619918d1bf85d853ddc661c4702046b5361bd3fde105d0b3c550f5dbdbaa6578557107588053bb4e980a21e83b95c2c9e9c7868fb89ca852bc950ac3dba'
         'SKIP')
 validpgpkeys=(
@@ -101,6 +101,7 @@ package_gobject-introspection() {
   _pick libg usr/include/gobject-introspection-1.0
   _pick libg usr/lib/libgirepository-1.0.so*
   _pick libg usr/lib/pkgconfig/gobject-introspection*-1.0.pc
+  _pick libg usr/lib/girepository-1.0/GIRepository-2.0.typelib
   _pick libg usr/share/gir-1.0/GIRepository-2.0.gir
   _pick libg usr/share/gtk-doc
 
