@@ -8,7 +8,7 @@ pkgname=(
   gobject-introspection-runtime
   libgirepository
 )
-pkgver=1.81.4
+pkgver=1.82.0
 pkgrel=1
 pkgdesc="Introspection system for GObject-based libraries"
 url="https://wiki.gnome.org/Projects/GObjectIntrospection"
@@ -38,7 +38,7 @@ source=(
   "git+https://gitlab.gnome.org/GNOME/glib.git?signed#tag=$_glibver"
   "git+https://gitlab.gnome.org/GNOME/gobject-introspection-tests.git"
 )
-b2sums=('cc8e5cc63c46cf44b2a6fa0ee64f9c367a064524018269d320b10780574bdca68b706db75dc2845d029bbb5c3c3096e60d569a86a45b4a769f455273dfce9feb'
+b2sums=('37852497c4e75a64e7d856e361cda2b5f0edf689ff3128dbae5231d81978211bfabb03c6089965141510643eb513f428f507e548bc1bef3f4db2a4180a291c2b'
         '9dee8619918d1bf85d853ddc661c4702046b5361bd3fde105d0b3c550f5dbdbaa6578557107588053bb4e980a21e83b95c2c9e9c7868fb89ca852bc950ac3dba'
         'SKIP')
 validpgpkeys=(
@@ -50,7 +50,7 @@ prepare() {
   cd $pkgbase
 
   git submodule init
-  git submodule set-url gobject-introspection-tests "${srcdir}/gobject-introspection-tests"
+  git submodule set-url gobject-introspection-tests "$srcdir/gobject-introspection-tests"
   git -c protocol.file.allow=always -c protocol.allow=never submodule update
 }
   
