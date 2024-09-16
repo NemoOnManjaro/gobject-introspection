@@ -53,7 +53,7 @@ prepare() {
   git submodule set-url gobject-introspection-tests "$srcdir/gobject-introspection-tests"
   git -c protocol.file.allow=always -c protocol.allow=never submodule update
 }
-  
+
 build() {
   local meson_options=(
     -D glib_src_dir="$srcdir/glib"
