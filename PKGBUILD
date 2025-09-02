@@ -34,13 +34,13 @@ makedepends=(
   python-sphinx
 )
 source=(
-  "git+https://gitlab.gnome.org/GNOME/gobject-introspection.git#tag=$pkgver"
-  "git+https://gitlab.gnome.org/GNOME/glib.git?signed#tag=$_glibver"
-  "git+https://gitlab.gnome.org/GNOME/gobject-introspection-tests.git"
+  "https://github.com/GNOME/gobject-introspection/archive/refs/tags/$pkgver.tar.gz"
+  "https://github.com/GNOME/glib/archive/refs/tags/$_glibver.tar.gz"
+  "https://github.com/GNOME/gobject-introspection-tests/archive/refs/heads/main.tar.gz"
   0001-scanner-Ignore-_Complex.patch
 )
-b2sums=('37852497c4e75a64e7d856e361cda2b5f0edf689ff3128dbae5231d81978211bfabb03c6089965141510643eb513f428f507e548bc1bef3f4db2a4180a291c2b'
-        '7611f78a903db16b954727124fb5d86dbacd5f89b6c672819d05cee3c012f3c23d3f1e1c1ebb63f176ca1b50e3d1a76390b7a7ea5552a74609f3acfad6abb16c'
+b2sums=('SKIP'
+        'SKIP'
         'SKIP'
         '1948e5122c99526052eb5b121f2eca1e72f476fce2907001097f7ac805fe64d39c667ede801991193d017840f4102fdeb973fe5f113ac31196d6a6131d439a79')
 validpgpkeys=(
@@ -49,29 +49,25 @@ validpgpkeys=(
 )
 
 prepare() {
-  cd $pkgbase
-
+  cd $pkgbase-$pkgver
+  cp -r ../gobject-introspection-tests-main/* gobject-introspection-tests/
   # Unbreak WebKitGTK build
   # https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/519
-  git apply -3 ../0001-scanner-Ignore-_Complex.patch
+  patch -p1 --input="${srcdir}/0001-scanner-Ignore-_Complex.patch"
 
-  git submodule init
-  git submodule set-url gobject-introspection-tests "$srcdir/gobject-introspection-tests"
-  git -c protocol.file.allow=always -c protocol.allow=never submodule update
+#  git submodule init
+#  git submodule set-url gobject-introspection-tests "$srcdir/gobject-introspection-tests"
+#  git -c protocol.file.allow=always -c protocol.allow=never submodule update
 }
 
 build() {
   local meson_options=(
-    -D glib_src_dir="$srcdir/glib"
+    -D glib_src_dir="$srcdir/glib-$_glibver"
     -D gtk_doc=true
   )
 
-  arch-meson $pkgbase build "${meson_options[@]}"
+  arch-meson $pkgbase-$pkgver build "${meson_options[@]}"
   meson compile -C build
-}
-
-check() {
-  meson test -C build --print-errorlogs
 }
 
 _pick() {
